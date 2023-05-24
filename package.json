@@ -36,6 +36,19 @@
           "default": 45903,
           "description": "The port number on which the HTTP server for the VStatus extension will listen (To serve the image file). Specify a unique port number to avoid conflicts with other services."
         },
+        "vstatus.theme": {
+          "type": "string",
+          "default": "dark",
+          "enum": [
+            "dark",
+            "light"
+          ],
+          "enumDescriptions": [
+            "Image will be generated with dark theme",
+            "Image will be generated with light theme"
+          ],
+          "description": "The images which will be generated will have specefied theme."
+        },
         "vstatus.trackTimeBy": {
           "type": "string",
           "default": "file",
