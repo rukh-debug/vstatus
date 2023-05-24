@@ -8,7 +8,6 @@ const compareTimes = (time1: Date, time2: Date): string => {
 };
 
 export const build = (context: vscode.ExtensionContext) => {
-  // replace info in html with the info we got in params
 
   // Access the global storage uri for your extension
   const storageUri = context.globalStorageUri;
@@ -30,10 +29,19 @@ export const build = (context: vscode.ExtensionContext) => {
   const timeDifference = compareTimes(pastTime, currentTime);
 
   return new Promise<void>((resolve, reject) => {
+    // replace info in html with the info on extension storage.
     let finalhtml = html.replace("{{vscodeImg}}", vscodeimg);
     finalhtml = finalhtml.replace("{{filename}}", filename);
     finalhtml = finalhtml.replace("{{workspace}}", workspace);
     finalhtml = finalhtml.replace("{{duration}}", timeDifference);
+
+    // fetch the theme
+    const config = vscode.workspace.getConfiguration("vstatus");
+    if (config.get("theme") === "dark") {
+      finalhtml = finalhtml.replace("color: black;", "color: white;");
+      finalhtml = finalhtml.replace("background-color: #faf6f6;", "background-color: #0d1117;");
+    }
+
     nodeHtmlToImage({
       output: fileUri,
       html: finalhtml,
