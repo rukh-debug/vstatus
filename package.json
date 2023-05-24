@@ -1,0 +1,78 @@
+{
+  "name": "vstatus",
+  "displayName": "vstatus",
+  "description": "Generates a image file containing the information like, what workspace the user is on, what file is he editing and since how long and so on.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vstatus.statuscheck",
+        "title": "Check vstatus running fine or no."
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "VSTATUS",
+      "properties": {
+        "vstatus.interval": {
+          "type": "number",
+          "default": 10,
+          "description": "The interval for how frequently the extension extracts workspace information, in seconds. For example, if set to 10, the extension will retrieve workspace data every 10 seconds."
+        },
+        "vstatus.serverPort": {
+          "type": "number",
+          "default": 45903,
+          "description": "The port number on which the HTTP server for the VStatus extension will listen (To serve the image file). Specify a unique port number to avoid conflicts with other services."
+        },
+        "vstatus.trackTimeBy": {
+          "type": "string",
+          "default": "file",
+          "enum": [
+            "file",
+            "workspace"
+          ],
+          "enumDescriptions": [
+            "Track time by the file being edited",
+            "Track time by the workspace being opened"
+          ],
+          "description": "Choose how to track time. 'file' tracks time based on the file being edited, while 'workspace' tracks time based on the workspace being opened."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.78.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "node-html-to-image": "^3.3.0"
+  }
+}
