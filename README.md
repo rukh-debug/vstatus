@@ -11,7 +11,7 @@
 
 Stay productive and share your coding progress with vstatus! 
 
-## Features (Incomplete, Need lot of works.)
+## Features (Incomplete, Need lots of work.)
 
 - **Workspace and File Duration Tracking:** vstatus tracks the durations of your activity within Visual Studio Code, capturing the time spent on workspaces and individual files.
 
