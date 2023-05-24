@@ -20,12 +20,13 @@ export const workspaceinfo = (context: vscode.ExtensionContext) => {
   extensionStorage.update("filename", filename);
   extensionStorage.update("workspace", workspace);
 
+  // console.log(vscode.window.activeTextEditor);
+  // console.log(vscode.window.state);
+  // console.log(vscode.window.tabGroups);
+
   // config
   const config = vscode.workspace.getConfiguration("vstatus");
   let trackTimeBy = config.get('trackTimeBy');
-
-  // Calculate time duration according to workspace or file opened.
-  // ask user to choose between 2 in extension setting.
 
   switch (trackTimeBy) {
     case 'file':

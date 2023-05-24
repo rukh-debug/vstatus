@@ -13,9 +13,28 @@ export const build = (context: vscode.ExtensionContext) => {
   const storageUri = context.globalStorageUri;
   const extensionStorage = context.globalState;
   const fs = vscode.workspace.fs;
+  const config = vscode.workspace.getConfiguration("vstatus");
+
+
+  // determine the image type
+  let IMAGE_TYPE = config.get('imageType');
+  let imageName = "vstatus.png";
+  switch (IMAGE_TYPE) {
+    case "jpeg":
+    case "jpg":
+      imageName = "vstatus.jpeg";
+      break;
+    case "png":
+      imageName = "vstatus.png";
+      break;
+    default:
+      // Handle other image types or set a default value if needed
+      break;
+  }
+
   // make sure the path is created
   fs.createDirectory(storageUri);
-  const fileUri = vscode.Uri.joinPath(storageUri, 'vstatus.png').fsPath.toString();
+  const fileUri = vscode.Uri.joinPath(storageUri, imageName).fsPath.toString();
 
   // get values from global state
   const filename = String(extensionStorage.get("filename"));
@@ -36,11 +55,11 @@ export const build = (context: vscode.ExtensionContext) => {
     finalhtml = finalhtml.replace("{{duration}}", timeDifference);
 
     // fetch the theme
-    const config = vscode.workspace.getConfiguration("vstatus");
     if (config.get("theme") === "dark") {
       finalhtml = finalhtml.replace("color: black;", "color: white;");
       finalhtml = finalhtml.replace("background-color: #faf6f6;", "background-color: #0d1117;");
     }
+
 
     nodeHtmlToImage({
       output: fileUri,

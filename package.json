@@ -49,6 +49,19 @@
           ],
           "description": "The images which will be generated will have specefied theme."
         },
+        "vstatus.imageType": {
+          "type": "string",
+          "default": "png",
+          "enum": [
+            "jpeg",
+            "png"
+          ],
+          "enumDescriptions": [
+            "Image will be generated in jpeg format",
+            "Image will be generated in png format"
+          ],
+          "description": "The images will be generated in specefied format."
+        },
         "vstatus.trackTimeBy": {
           "type": "string",
           "default": "file",

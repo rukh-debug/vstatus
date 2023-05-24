@@ -19,9 +19,25 @@ export const startServer = (context: vscode.ExtensionContext, port: number) => {
 
       const stream = fs.createReadStream(fileUri);
 
+      const config = vscode.workspace.getConfiguration("vstatus");
+      let IMAGE_TYPE = config.get('imageType');
+      let contentType = "image/jpeg";
+      switch (IMAGE_TYPE) {
+        case "jpeg":
+        case "jpg":
+          contentType = "image/jpeg";
+          break;
+        case "png":
+          contentType = "image/png";
+          break;
+        default:
+          // Handle other image types or set a default value if needed
+          break;
+      }
+
       stream.on('open', () => {
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'image/jpeg');
+        res.setHeader('Content-Type', contentType);
         res.setHeader('Cache-Control', 'no-cache');
         stream.pipe(res);
       });

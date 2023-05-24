@@ -1,6 +1,6 @@
 # vstatus (VS Code Status)
 
-[![Almost live DEMO](https://vstatus.rubenk.com.np/)](https://vstatus.rubenk.com.np/)
+[![Live feed](https://vstatus.rubenk.com.np/?npn)](https://github.com/slithery0)
 
 <!-- [![Version](https://vsmarketplacebadge.apphb.com/version/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
 [![Downloads](https://vsmarketplacebadge.apphb.com/downloads/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
@@ -11,7 +11,7 @@
 
 Stay productive and share your coding progress with vstatus!
 
-## Features (Incomplete, Need lot of works.)
+## Features (Incomplete, Need lots of work.)
 
 - **Workspace and File Duration Tracking:** vstatus tracks the durations of your activity within Visual Studio Code, capturing the time spent on workspaces and individual files.
 
@@ -49,6 +49,8 @@ vstatus provides the following configuration options:
 - `vstatus.theme`: Defines the theme for the activity visualization. Choose from available options: `light`, `dark`. Default: `dark`.
 
 - `vstatus.serverPort`: Specifies the port number on which the HTTP server for vstatus will listen. Default: `45903`.
+
+- `vstatus.imageType`: The imge will be generated in specefied format. Choose from available options: `jpeg` , `png`. Default: `png`.
 
 - `vstatus.trackTimeBy`: Choose how to track time. 'file' tracks time based on the file being edited, while 'workspace' tracks time based on the workspace being opened. Choose from available options: `workspace`, `file`. Default: `file`
 
