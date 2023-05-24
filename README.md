@@ -64,10 +64,10 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Todo
 
-[x] Theme (Dark/Light)
+[x]Theme (Dark/Light)
 
-[] Other form of stats (Sugggestions are welcome)
+[]Other form of stats (Sugggestions are welcome)
 
-[] Different types of images
+[x]Different types of images
 
 

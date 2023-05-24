@@ -17,3 +17,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Fixed
 
 - Cache control to nocache (Github readme stores cache, image updates frequently.)
+
+
+## [0.0.3]
+
+### Added
+
+- Image format added (jpeg/png)
+
