@@ -3,6 +3,7 @@
   "displayName": "vstatus",
   "description": "Generates a image file containing the information like, what workspace the user is on, what file is he editing and since how long and so on.",
   "version": "0.0.1",
+  "repository": "https://github.com/slithery0/vstatus",
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -62,6 +63,7 @@
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/puppeteer": "^7.0.4",
     "@types/vscode": "^1.78.0",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",

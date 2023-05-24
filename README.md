@@ -16,6 +16,10 @@ Stay productive and share your coding progress with vstatus!
 
 - **Live Status Image:** vstatus creates an HTTP server to serve the generated activity visualization as a live status image. You can access this image via a specific URL, allowing you to share and monitor your coding progress with others.
 
+## Requirements
+
+- Visual Studio Code version 1.78.0 or higher.
+
 ## Installation
 
 1. Launch Visual Studio Code.
@@ -54,3 +58,5 @@ This project is licensed under the [MIT License](LICENSE).
 ## Todo
 
 [] Theme (Dark/Light)
+[] Other form of stats
+[] Different types of images
