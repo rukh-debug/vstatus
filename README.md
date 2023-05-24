@@ -1,6 +1,6 @@
 # vstatus (VS Code Status)
 
-[![Almost live DEMO](https://vstatus.rubenk.com.np/)](https://vstatus.rubenk.com.np/) 
+[![Almost live DEMO](https://vstatus.rubenk.com.np/?)](https://vstatus.rubenk.com.np/?) 
 
 <!-- [![Version](https://vsmarketplacebadge.apphb.com/version/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
 [![Downloads](https://vsmarketplacebadge.apphb.com/downloads/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
