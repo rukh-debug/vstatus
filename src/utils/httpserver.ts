@@ -22,6 +22,7 @@ export const startServer = (context: vscode.ExtensionContext, port: number) => {
       stream.on('open', () => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'image/jpeg');
+        res.setHeader('Cache-Control', 'no-cache');
         stream.pipe(res);
       });
 
