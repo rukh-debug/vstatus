@@ -1,6 +1,6 @@
 # vstatus (VS Code Status)
 
-[![Almost live DEMO](https://vstatus.rubenk.com.np/?ncn)](https://vstatus.rubenk.com.np/?ncn) 
+[![Live feed](https://vstatus.rubenk.com.np/?npn)](https://github.com/slithery0)
 
 <!-- [![Version](https://vsmarketplacebadge.apphb.com/version/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
 [![Downloads](https://vsmarketplacebadge.apphb.com/downloads/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
