@@ -1,71 +1,56 @@
-# vstatus README
+# vstatus (VS Code Status)
 
-This is the README for your extension "vstatus". After writing up a brief description, we recommend including the following sections.
+<!-- [![Version](https://vsmarketplacebadge.apphb.com/version/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
+[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
+[![Rating](https://vsmarketplacebadge.apphb.com/rating/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id) -->
+
+> vstatus is a Visual Studio Code extension that tracks your workspace and file durations, generates insightful activity visualizations, and provides a live status image via an HTTP server.
+
+Stay productive and share your coding progress with vstatus!
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Workspace and File Duration Tracking:** vstatus tracks the durations of your activity within Visual Studio Code, capturing the time spent on workspaces and individual files.
 
-For example if there is an image subfolder under your extension project workspace:
+- **Activity Visualization:** Using the collected information, vstatus generates visually appealing and insightful activity visualizations. These visualizations provide a graphical representation of your coding patterns and productivity.
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Live Status Image:** vstatus creates an HTTP server to serve the generated activity visualization as a live status image. You can access this image via a specific URL, allowing you to share and monitor your coding progress with others.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Installation
 
-## Requirements
+1. Launch Visual Studio Code.
+2. Go to the Extensions view by clicking on the square icon on the left sidebar or pressing `Ctrl+Shift+X`.
+3. Search for `vstatus` in the Extensions Marketplace.
+4. Click on the "Install" button for the "vstatus" extension.
+5. Once installed, the extension will be active and ready to use.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Usage
 
-## Extension Settings
+1. Open Visual Studio Code.
+2. Customize the extension's settings, such as the tracking interval and visualization options, through the extension's settings panel.
+3. As you work in Visual Studio Code, vstatus will automatically track your workspace and file durations.
+4. Access the live status image by opening the provided URL in a web browser. Share this URL with others to showcase your coding activity.
+5. Enjoy visualizing and sharing your coding progress with vstatus!
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Configuration
 
-For example:
+vstatus provides the following configuration options:
 
-This extension contributes the following settings:
+- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. Default: `10`.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- `vstatus.visualizationTheme`: Defines the theme for the activity visualization. Choose from available options: `light`, `dark`. Default: `light`.
 
-## Known Issues
+- `vstatus.serverPort`: Specifies the port number on which the HTTP server for vstatus will listen. Default: `45903`.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## Contributing
 
-## Release Notes
+Contributions are welcome! If you encounter any issues, have suggestions, or want to contribute to the project, please feel free to open a new issue or submit a pull request. For more information, refer to the [Contributing Guidelines](CONTRIBUTING.md).
 
-Users appreciate release notes as you update your extension.
+## License
 
-### 1.0.0
+This project is licensed under the [MIT License](LICENSE).
 
-Initial release of ...
 
-### 1.0.1
+## Todo
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[] Theme (Dark/Light)
