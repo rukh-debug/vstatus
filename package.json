@@ -2,7 +2,7 @@
   "name": "vstatus",
   "displayName": "vstatus",
   "description": "Generates an image file containing the information like, what workspace the user is on, what file is he editing and since how long and so on.",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "repository": "https://github.com/slithery0/vstatus",
   "publisher": "rubennnk",
   "engines": {

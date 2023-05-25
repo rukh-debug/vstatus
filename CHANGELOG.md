@@ -25,3 +25,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Image format added (jpeg/png)
 
+## [0.0.5]
+
+### Added
+
+- The size of the filename or workspace name determines the width of the image
+- 
+
+

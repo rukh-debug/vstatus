@@ -11,7 +11,7 @@ export let html = `
       font-size: 18px;
       letter-spacing: -0.02em;
       height: 120px;
-      width: 500px;
+      width: {{width}}px;
       background-color: {{background-color}};
       padding: 15px;
       display: flex;
@@ -31,13 +31,14 @@ export let html = `
 
     .icon {
       border-radius: 7px;
+      margin: 15px;
     }
   </style>
 </head>
 
 <body>
   <div class='box'>
-    <img class='icon' src='{{vscodeImg}}' width='85' hight='85' />
+    <img class='icon' src='{{vscodeImg}}' width='65' hight='65' />
     <div class='text-container'>
       <div class='text-item'>Editing: {{filename}} </div>
       <div class='text-item'>Workspace: {{workspace}} </div>
