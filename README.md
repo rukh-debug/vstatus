@@ -65,9 +65,9 @@ This project is licensed under the [MIT License](LICENSE).
 ## Todo
 
 [x]Theme (Dark/Light)
-
+[x]better theme handling
 []Other form of stats (Sugggestions are welcome)
-
 [x]Different types of images
+[] width of the text determines the width of the card + the width of view port for puppeter. (some kind of algorithm)
 
 

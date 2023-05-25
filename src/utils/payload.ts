@@ -1,41 +1,40 @@
 export let html = `
 <html lang="en">
+
 <head>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
   <style>
+    .box {
+      border: 2px solid #666;
+      border-radius: 7px;
+      box-sizing: border-box;
+      font-family: monospace;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      height: 120px;
+      width: 500px;
+      background-color: {{background-color}};
+      padding: 15px;
+      display: flex;
+      flex-direction: row;
+    }
 
-.box{
-  border: 2px solid #666;
-  border-radius: 7px;
-  box-sizing: border-box;
-  font-family: Open Sans Condensed;
-  font-size: 18px;
-  letter-spacing: -0.02em;
-  height: 120px;
-  width: 400px;
-  background-color: #faf6f6;
-  padding: 15px;
-  display: flex;
-  flex-direction: row;
-}
+    .text-container {
+      margin: 7px 0px 7px 10px;
+      display: flex;
+      flex-direction: column;
+    }
 
-.text-container{
-  margin: 7px 0px 7px 10px;
-  display: flex;
-  flex-direction: column;
-}
-.text-item{
-  color: black;
-  margin-bottom: 4px;
-}
+    .text-item {
+      color: {{text-color}};
+      margin-bottom: 4px;
+    }
 
-.icon{
-  border-radius: 7px;
-}
-
+    .icon {
+      border-radius: 7px;
+    }
   </style>
 </head>
+
 <body>
   <div class='box'>
     <img class='icon' src='{{vscodeImg}}' width='85' hight='85' />
@@ -46,6 +45,7 @@ export let html = `
     </div>
   </div>
 </body>
+
 </html>
 `;
 

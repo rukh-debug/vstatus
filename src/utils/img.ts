@@ -15,7 +15,6 @@ export const build = (context: vscode.ExtensionContext) => {
   const fs = vscode.workspace.fs;
   const config = vscode.workspace.getConfiguration("vstatus");
 
-
   // determine the image type
   let IMAGE_TYPE = config.get('imageType');
   let imageName = "vstatus.png";
@@ -54,10 +53,20 @@ export const build = (context: vscode.ExtensionContext) => {
     finalhtml = finalhtml.replace("{{workspace}}", workspace);
     finalhtml = finalhtml.replace("{{duration}}", timeDifference);
 
-    // fetch the theme
-    if (config.get("theme") === "dark") {
-      finalhtml = finalhtml.replace("color: black;", "color: white;");
-      finalhtml = finalhtml.replace("background-color: #faf6f6;", "background-color: #0d1117;");
+    // fetch the theme and make it.
+    switch (config.get("theme")) {
+      case "dark":
+        finalhtml = finalhtml.replace("{{text-color}}", "#E7D7AD");
+        finalhtml = finalhtml.replace("{{background-color}}", "#0d1117");
+        break;
+      case "white":
+        finalhtml = finalhtml.replace("{{text-color}}", "black");
+        finalhtml = finalhtml.replace("{{background-color}}", "#faf6f6");
+        break;
+      default:
+        finalhtml = finalhtml.replace("{{text-color}}", "#E7D7AD");
+        finalhtml = finalhtml.replace("{{background-color}}", "#0d1117");
+        break;
     }
 
 
@@ -66,7 +75,7 @@ export const build = (context: vscode.ExtensionContext) => {
       html: finalhtml,
       quality: 100,
       transparent: true,
-      puppeteerArgs: { defaultViewport: { width: 416, height: 120 } }
+      puppeteerArgs: { defaultViewport: { width: 516, height: 120 } }
     }).then(() => {
       console.log("Image created");
       resolve();
