@@ -21,12 +21,12 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 
   .key-name {
     fill: {{keyfillc}}; /* Dark gray */
-    font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
-            <!-- font-weight: bold; -->
+    font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif;
+    <!-- font-weight: bold; -->
   }
 
   .value {
-    font: 400 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
+    font: 500 12px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
     fill: {{valuefillc}};
     white-space: nowrap;
     overflow: hidden;
@@ -104,9 +104,8 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
   }
 
 </style>
-<!-- stroke-opacity="0" -->
 
-<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="{{bgc}}"/>
+<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="{{bgc}}" stroke-opacity="0"/>
 
 <!-- this is svg icon of vscode -->
 <svg class="icon" viewBox="0 0 100 100" fill="none" x="25" y="26" width="65" height="65"
@@ -173,7 +172,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 <g transform="translate(0, 0)">
   <g class="stagger" style="animation-delay: 200ms" transform="translate(110, 88)">
     <text class="text-item">
-      <tspan class="key-name">Since: </tspan>
+      <tspan class="key-name">Since </tspan>
       <tspan class="value">{{since}}</tspan>
     </text>
   </g>
@@ -272,7 +271,7 @@ export default async function handler(
     switch (theme) {
       case "dark":
         svg = svg.replace("{{bgc}}", "#0d1117");
-        svg = svg.replace("{{keyfillc}}", "#333");
+        svg = svg.replace("{{keyfillc}}", "#929292");
         svg = svg.replace("{{valuefillc}}", "#929292");
         break;
       case "light":
