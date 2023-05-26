@@ -1,5 +1,6 @@
 import { basename } from "path";
 import * as vscode from "vscode";
+import WorkspaceInfo from "../types/workspaceinfo";
 
 export const workspaceinfo = (context: vscode.ExtensionContext) => {
   // Access the extension's global storage
@@ -8,7 +9,6 @@ export const workspaceinfo = (context: vscode.ExtensionContext) => {
   let filename = "No file opened";
   let workspace = "idle";
   let time = new Date().getTime();
-
   let lastFileName = extensionStorage.get("filename");
   let lastWorkSpaceName = extensionStorage.get("workspace");
 
@@ -26,30 +26,39 @@ export const workspaceinfo = (context: vscode.ExtensionContext) => {
 
   // config
   const config = vscode.workspace.getConfiguration("vstatus");
-  let trackTimeBy = config.get('trackTimeBy');
 
-  switch (trackTimeBy) {
-    case 'file':
-      if (lastFileName !== filename) {
-        extensionStorage.update('time', time);
-      }
-      break;
+  let initWorkspaceOpened;
+  let initFileOpened;
 
-    case 'workspace':
-      if (lastWorkSpaceName !== workspace) {
-        extensionStorage.update('time', time);
-      }
-      break;
-
-    default:
-      if (lastFileName !== filename) {
-        extensionStorage.update('time', time);
-      }
-      break;
+  if (lastWorkSpaceName !== workspace) {
+    // if workspace changes, reset init workspace opened time to now.
+    extensionStorage.update("initWorkspaceOpened", time);
+    // in that case we also have to reset the initFileOpened.
+    extensionStorage.update("initFileOpened", time);
+    // now get the values in vars
+    initWorkspaceOpened = extensionStorage.get("initWorkspaceOpened");
+    initFileOpened = extensionStorage.get("initFileOpened");
+  } else {
+    initWorkspaceOpened = extensionStorage.get("initWorkspaceOpened");
   }
+
+  if (lastFileName !== filename) {
+    extensionStorage.update("initFileOpened", time);
+    initFileOpened = extensionStorage.get("initFileOpened");
+  } else {
+    initFileOpened = extensionStorage.get("initFileOpened");
+  }
+
   // else
   // let the time be as it is. 
   // this means the file is being edited/or is on same workspace (depends on config setting) since last time fetched
   // so this remains unchanged
-  return;
+  const finalDataToResolve = {
+    filename,
+    workspace,
+    initFileOpened,
+    initWorkspaceOpened,
+    lastPushToServer: time
+  };
+  return finalDataToResolve;
 };

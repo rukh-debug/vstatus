@@ -72,10 +72,11 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 plan for v0.1.0
-[] server to take the data from extension
-[] server generates svg on the fly whenever requested
+[x] server to take the data from extension
+[x] server generates svg on the fly whenever requested
+[] auth implementation on server
 - Basically extension - server (seperate)
-[] deploy it to vercel 
+[x] deploy it to vercel 
 [] deploying on vercel template (show in readme)
 
 

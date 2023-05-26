@@ -32,49 +32,15 @@
           "default": 10,
           "description": "The interval for how frequently the extension extracts workspace information, in seconds. For example, if set to 10, the extension will retrieve workspace data every 10 seconds."
         },
-        "vstatus.serverPort": {
-          "type": "number",
-          "default": 45903,
-          "description": "The port number on which the HTTP server for the VStatus extension will listen (To serve the image file). Specify a unique port number to avoid conflicts with other services."
-        },
-        "vstatus.theme": {
+        "vstatus.serverurl": {
           "type": "string",
-          "default": "dark",
-          "enum": [
-            "dark",
-            "light"
-          ],
-          "enumDescriptions": [
-            "Image will be generated with dark theme",
-            "Image will be generated with light theme"
-          ],
-          "description": "The images which will be generated will have specefied theme."
+          "default": "",
+          "description": "The URL of the server deployed (probably on vercel)."
         },
-        "vstatus.imageType": {
+        "vstatus.apikey": {
           "type": "string",
-          "default": "png",
-          "enum": [
-            "jpeg",
-            "png"
-          ],
-          "enumDescriptions": [
-            "Image will be generated in jpeg format",
-            "Image will be generated in png format"
-          ],
-          "description": "The images will be generated in specefied format."
-        },
-        "vstatus.trackTimeBy": {
-          "type": "string",
-          "default": "file",
-          "enum": [
-            "file",
-            "workspace"
-          ],
-          "enumDescriptions": [
-            "Track time by the file being edited",
-            "Track time by the workspace being opened"
-          ],
-          "description": "Choose how to track time. 'file' tracks time based on the file being edited, while 'workspace' tracks time based on the workspace being opened."
+          "default": "",
+          "description": "The api key you have in .env variables of the server"
         }
       }
     }
@@ -99,5 +65,8 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
   }
 }
