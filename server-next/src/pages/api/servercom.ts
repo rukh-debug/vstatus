@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { kv } from '@vercel/kv';
 import ServerResponse from '@/types/ServerResponse';
 import VScomeReqData from '@/types/VScomReqData';
+
 // This is to communicate with vscode to server
 
 
@@ -10,8 +11,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ServerResponse>
 ) {
-  // lets handle auth here itself for now.
-  if (req.headers.authKey !== process.env.UNIQUE_API_KEY) {
+  if (req.headers[`authorization`] !== process.env.UNIQUE_API_KEY) {
+    console.log("check");
     return res.status(401).json({
       message: "Authorization failed, Please provide correct api key",
       status: false
@@ -20,7 +21,6 @@ export default async function handler(
 
   if (req.method === 'POST') {
     let body: VScomeReqData = req.body;
-    console.log(typeof body);
     await kv.set(
       "vstat",
       JSON.stringify(body),

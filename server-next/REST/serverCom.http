@@ -1,5 +1,6 @@
 POST http://localhost:3000/api/servercom
-Authorization: testtoken
+authorization: testtoken
+Content-Type: application/json
 
 {
   "statusInterval": "10",
