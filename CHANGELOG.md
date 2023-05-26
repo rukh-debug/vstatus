@@ -30,6 +30,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - The size of the filename or workspace name determines the width of the image
-- 
+
+## [0.1.0]
+
+### Added
+- Most of the thing recreated
+- Have a server of it's own now
+- image generaton (png/jpg) removed, and implemented SVG through server
 
 
