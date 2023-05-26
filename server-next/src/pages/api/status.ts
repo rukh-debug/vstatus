@@ -105,10 +105,10 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 
 </style>
 
-<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="{{bgc}}" />
+<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="{{bgc}}" stroke-opacity="0"/>
 
 <!-- this is svg icon of vscode -->
-<svg class="icon" viewBox="0 0 100 100" fill="none" x="25" y="16" width="65" height="65"
+<svg class="icon" viewBox="0 0 100 100" fill="none" x="25" y="26" width="65" height="65"
   xmlns="http://www.w3.org/2000/svg">
   <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M 70.9 99.3 C 72.5 99.9 74.3 99.9 75.9 99.1 L 96.5 89.2 C 98.6 88.2 100 86 100 83.6 V 16.4 C 100 14 98.6 11.8 96.5 10.8 L 75.9 0.9 C 73.8 -0.1 71.3 0.1 69.5 1.4 C 69.3 1.6 69 1.8 68.8 2.1 L 29.4 38 L 12.2 25 C 10.6 23.8 8.4 23.9 6.9 25.2 L 1.4 30.3 C -0.5 31.9 -0.5 34.8 1.4 36.4 L 16.2 50 L 1.4 63.6 C -0.5 65.2 -0.5 68.1 1.4 69.7 L 6.9 74.8 C 8.4 76.1 10.6 76.2 12.2 75 L 29.4 62 L 68.8 97.9 C 69.4 98.5 70.1 99 70.9 99.3 Z M 75 27.3 L 45.1 50 L 75 72.7 V 27.3 Z" fill="white"/>
@@ -152,7 +152,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 </svg>
 <!-- vscode svg icon ends here -->
 <g transform="translate(0, 0)">
-  <g class="stagger" style="animation-delay: 50ms" transform="translate(110, 30)">
+  <g class="stagger" style="animation-delay: 50ms" transform="translate(110, 40)">
     <text class="text-item">
       <tspan class="key-name">Editing: </tspan>
       <tspan class="value">{{filename}}</tspan>
@@ -161,7 +161,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 </g>
 
 <g transform="translate(0, 0)">
-  <g class="stagger" style="animation-delay: 150ms" transform="translate(110, 54)">
+  <g class="stagger" style="animation-delay: 150ms" transform="translate(110, 64)">
     <text class="text-item">
       <tspan class="key-name">Workspace: </tspan>
       <tspan class="value">{{workspace}}</tspan>
@@ -170,7 +170,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 </g>
 
 <g transform="translate(0, 0)">
-  <g class="stagger" style="animation-delay: 200ms" transform="translate(110, 78)">
+  <g class="stagger" style="animation-delay: 200ms" transform="translate(110, 88)">
     <text class="text-item">
       <tspan class="key-name">Since </tspan>
       <tspan class="value">{{since}}</tspan>
