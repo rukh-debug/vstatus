@@ -12,7 +12,6 @@ export default async function handler(
   res: NextApiResponse<ServerResponse>
 ) {
   if (req.headers[`authorization`] !== process.env.UNIQUE_API_KEY) {
-    console.log("check");
     return res.status(401).json({
       message: "Authorization failed, Please provide correct api key",
       status: false

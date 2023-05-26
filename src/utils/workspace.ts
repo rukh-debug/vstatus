@@ -60,5 +60,6 @@ export const workspaceinfo = (context: vscode.ExtensionContext) => {
     initWorkspaceOpened,
     lastPushToServer: time
   };
+  console.log(finalDataToResolve);
   return finalDataToResolve;
 };

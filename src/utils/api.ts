@@ -14,6 +14,7 @@ export async function sendRequest(serverurl: string, body: object, apikey: strin
 
     axios.request(requestConfig)
       .then((response) => {
+        console.log(response);
         resolve(response);
       })
       .catch((error) => {
