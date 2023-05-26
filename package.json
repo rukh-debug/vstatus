@@ -1,7 +1,7 @@
 {
   "name": "vstatus",
   "displayName": "vstatus",
-  "description": "Generates an image file containing the information like, what workspace the user is on, what file is he editing and since how long and so on.",
+  "description": "vstatus is a Visual Studio Code extension that extracts workspace information, such as filename, workspace name, and time elapsed, and sends this data to a server. The server then generates an SVG image based on the received information and serves it on an endpoint.",
   "version": "0.1.2",
   "icon": "assets/logo.png",
   "repository": "https://github.com/slithery0/vstatus",
@@ -30,7 +30,7 @@
         "vstatus.interval": {
           "type": "number",
           "default": 10,
-          "description": "The interval for how frequently the extension extracts workspace information, in seconds. For example, if set to 10, the extension will retrieve workspace data every 10 seconds."
+          "description": "The interval for how frequently the extension extracts workspace information, in seconds. For example, if set to 10, the extension will retrieve workspace data every 10 seconds. (Require restart if update)"
         },
         "vstatus.serverurl": {
           "type": "string",

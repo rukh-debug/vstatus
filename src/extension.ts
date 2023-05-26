@@ -10,13 +10,15 @@ export async function activate(context: vscode.ExtensionContext) {
 	const config = vscode.workspace.getConfiguration("vstatus");
 	let INTERVAL = config.get("interval");
 
-	let SERVER = await getConfiguredValue('serverurl', 'Enter the server URL:');
-	let APIKEY = await getConfiguredValue('apikey', 'Enter the API key:');
 
 	console.log('vstatus started.');
 
 	// function to fetch vscode workspace information and build image based on it.
 	async function makeandbake() {
+		//if user changes this setting, it should be fetched on next loop;
+		let SERVER = await getConfiguredValue('serverurl', 'Enter the server URL:');
+		let APIKEY = await getConfiguredValue('apikey', 'Enter the API key:');
+
 		let workspaceInfo = workspaceinfo(context);
 		let finalBody = {
 			...workspaceInfo,
@@ -27,9 +29,10 @@ export async function activate(context: vscode.ExtensionContext) {
 		SERVER = new URL("/api/servercom", SERVER).href;
 		sendRequest(SERVER, finalBody, APIKEY)
 			.catch((err) => {
+				console.log(err);
 				vscode.window.showErrorMessage(err.message);
 				// show message from server aswell if its a response from the server
-				err.response?.message ? vscode.window.showErrorMessage(err.response.message) : null;
+				err.response?.data?.message ? vscode.window.showErrorMessage(err.response.data.message) : null;
 			});
 	}
 
