@@ -19,9 +19,9 @@ Deploy the server by clicking on the "Deploy to Vercel" button below:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fslithery0%2Fvstatus%2Ftree%2Fmain%2Fserver-next&env=UNIQUE_API_KEY&envDescription=API%20key%20that%20you%20will%20require%20while%20sending%20data%20from%20your%20vscode%20extension.%20Generate%20a%20secure%20one%20and%20keep%20it%20safe.&project-name=vstatus&repository-name=vstatus)
 
+Copy your server url.
 
-Once you've deployed your server, you'll need to go back to your **Vercel dashboard** and open the project dashboard you just created. From here, navigate to **Storage > Create New Database > select KV (Durable Redis) >> Continue >>**. After successfully creating the database, **connect** it to the project you just created. ezpz!!!. 
-
+Once you've deployed your server, you'll need to go back to your **Vercel dashboard** and open the project dashboard you just created. From here, navigate to **Storage > Create New Database > select KV (Durable Redis) >> Continue >>**. After successfully creating the database, There will be a **connect** button, where you can click and connect it to the project you just created. ezpz!!!. 
 
 You will be asked to add a `UNIQUE_API_KEY`. Remember to generate a secure key and keep it safe, you wll need it later.
 
@@ -31,17 +31,17 @@ Open the extension's settings by navigating to **File > Preferences > Settings**
 
 Configure the following settings:
 
-- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. Default: 10.
+- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. `Default: 10`.
 
-- `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible.
+- `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible. `eg. https://vstatus.verel.app`
 
-- `vstatus.apiKey`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name UNIQUE_API_KEY.
+- `vstatus.apiKey`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name `UNIQUE_API_KEY`. 
 
 Save the settings.
 
 ## Usage
 
-To retrieve the SVG image containing the workspace information, use the following URL:
+To retrieve the SVG image containing the workspace information, use the following URL/endpoint:
 
 `https://<your-server-url>/api/status`
 
@@ -72,5 +72,5 @@ https://<your-server-url>/api/status?theme=dark&timefor=file
 
 This will generate an SVG image with a dark theme, showing the time for the file, a black background color, white key name, and green value name.
 
-License
+## License
 This project is licensed under the MIT License.
