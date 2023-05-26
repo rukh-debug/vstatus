@@ -70,4 +70,12 @@ This project is licensed under the [MIT License](LICENSE).
 [x]Different types of images
 [x] width of the text determines the width of the card + the width of view port for puppeter. (some kind of algorithm)
 
+---
+plan for v0.1.0
+[] server to take the data from extension
+[] server generates svg on the fly whenever requested
+- Basically extension - server (seperate)
+[] deploy it to vercel 
+[] deploying on vercel template (show in readme)
+
 
