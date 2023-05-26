@@ -1,82 +1,70 @@
-# vstatus (VS Code Status)
+# vstatus
 
-[![Live feed](https://vstatus.rubenk.com.np/?npn)](https://github.com/slithery0)
+vstatus is a Visual Studio Code extension that extracts workspace information, such as filename, workspace name, and time elapsed, and sends this data to a server. The server then generates an SVG image based on the received information and serves it on an endpoint. This endpoint can be used to retrieve the updated SVG image containing filename, workspace name, and time lapse. (Intented to be used for github readme)
 
-<!-- [![Version](https://vsmarketplacebadge.apphb.com/version/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
-[![Downloads](https://vsmarketplacebadge.apphb.com/downloads/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id)
-[![Rating](https://vsmarketplacebadge.apphb.com/rating/your-extension-name.your-extension-id.svg)](https://marketplace.visualstudio.com/items?itemName=your-extension-name.your-extension-id) -->
+# Live DEMO
 
-> vstatus is a Visual Studio Code extension that tracks your workspace and file durations, generates insightful activity visualizations, and provides a live status image via an HTTP server.
-> (Initially Intented to be used for github readme page)
+[![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/slithery0)
 
-Stay productive and share your coding progress with vstatus!
-
-## Features (Incomplete, Need lots of work.)
-
-- **Workspace and File Duration Tracking:** vstatus tracks the durations of your activity within Visual Studio Code, capturing the time spent on workspaces and individual files.
-
-- **Activity Visualization:** Using the collected information, vstatus generates visually appealing and insightful activity visualizations. These visualizations provide a graphical representation of your coding patterns and productivity.
-
-- **Live Status Image:** vstatus creates an HTTP server to serve the generated activity visualization as a live status image. You can access this image via a specific URL, allowing you to share and monitor your coding progress with others.
-
-## Requirements
+## Extension's Requirements
 
 - Visual Studio Code version 1.78.0 or higher.
 
+
 ## Installation
 
-1. Launch Visual Studio Code.
-2. Go to the Extensions view by clicking on the square icon on the left sidebar or pressing `Ctrl+Shift+X`.
-3. Search for `vstatus` in the Extensions Marketplace.
-4. Click on the "Install" button for the "vstatus" extension.
-5. Once installed, the extension will be active and ready to use.
+To use vstatus, follow these steps:
+
+1. Deploy the server by clicking on the "Deploy to Vercel" button below:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fslithery0%2Fvstatus%2Ftree%2Fmain%2Fserver-next&env=UNIQUE_API_KEY&envDescription=API%20key%20that%20you%20will%20require%20while%20sending%20data%20from%20your%20vscode%20extension.%20Generate%20a%20secure%20one%20and%20keep%20it%20safe.&project-name=vstatus&repository-name=vstatus)
+
+Install the vstatus extension in Visual Studio Code.
+
+Open the extension's settings by navigating to File > **Preferences > Settings** or using the keyboard shortcut **Ctrl+Comma (,)**.
+
+Configure the following settings:
+
+- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. Default: 10.
+
+- `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible.
+
+- `vstatus.apiKey`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name UNIQUE_API_KEY.
+
+Save the settings.
 
 ## Usage
 
-1. Open Visual Studio Code.
-2. Customize the extension's settings, such as the tracking interval and visualization options, through the extension's settings panel.
-3. As you work in Visual Studio Code, vstatus will automatically track your workspace and file durations.
-4. Access the live status image by opening `localhost:<port specefied on extension setting>` in web browser. Serve this URL with some tunneling tool to expose on the internet.
-5. Use the image URL's on own website, github readme and so on.
-5. Enjoy visualizing and sharing your coding progress with vstatus!
+To retrieve the SVG image containing the workspace information, use the following URL:
 
-## Configuration
+`https://<your-server-url>/api/status`
 
-vstatus provides the following configuration options:
+Replace <your-server-url> with the URL where your server is hosted.
 
-- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. Default: `10`.
+## Query Parameters
 
-- `vstatus.theme`: Defines the theme for the activity visualization. Choose from available options: `light`, `dark`. Default: `dark`.
+The following query parameters can be used to customize the appearance of the SVG image:
 
-- `vstatus.serverPort`: Specifies the port number on which the HTTP server for vstatus will listen. Default: `45903`.
+| Parameter  | Description                                                                                                            | Default Value |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- |
+| theme      | Specifies the theme of the image. Valid values: `dark`, `light`. If not provided, other color parameters will be used. | dark          |
+| timefor    | Specifies whether the time is shown for `file` or `workspace`.                                                         | file          |
+| bgc        | Sets the background color of the image. Provide a color code.                                                          | black         |
+| keyfillc   | Sets the color of the key name in the SVG image. Provide a color code.                                                 | white         |
+| valuefillc | Sets the color of the value name in the SVG image. Provide a color code.                                               | gray          |
 
-- `vstatus.imageType`: The imge will be generated in specefied format. Choose from available options: `jpeg` , `png`. Default: `png`.
+If you choose the theme parameter, the bgc, keyfillc, and valuefillc parameters will be ignored. However, if you don't specify the theme parameter, you can customize the colors using the bgc, keyfillc, and valuefillc parameters.
 
-- `vstatus.trackTimeBy`: Choose how to track time. 'file' tracks time based on the file being edited, while 'workspace' tracks time based on the workspace being opened. Choose from available options: `workspace`, `file`. Default: `file`
+Note: You can specify colors using valid color codes, such as #RRGGBB or color names.
 
-## Contributing
+Example usage with query parameters:
 
-Contributions are welcome! If you encounter any issues, have suggestions, or want to contribute to the project, please feel free to open a new issue or submit a pull request. For more information, refer to the [Contributing Guidelines](CONTRIBUTING.md).
+```
+https://<your-server-url>/api/status?theme=dark&timefor=file
 
-## License
+```
 
-This project is licensed under the [MIT License](LICENSE).
+This will generate an SVG image with a dark theme, showing the time for the file, a black background color, white key name, and green value name.
 
-## Todo
-
-[x]Theme (Dark/Light)
-[x]better theme handling
-[]Other form of stats (Sugggestions are welcome)
-[x]Different types of images
-[x] width of the text determines the width of the card + the width of view port for puppeter. (some kind of algorithm)
-
----
-plan for v0.1.0
-[x] server to take the data from extension
-[x] server generates svg on the fly whenever requested
-[] auth implementation on server
-- Basically extension - server (seperate)
-[x] deploy it to vercel 
-[] deploying on vercel template (show in readme)
-
-
+License
+This project is licensed under the MIT License.
