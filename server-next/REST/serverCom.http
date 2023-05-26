@@ -1,0 +1,40 @@
+POST http://localhost:3000/api/servercom
+Authorization: testtoken
+
+{
+  "statusInterval": "10",
+  "filename": "helloworld.py",
+  "workspace": "hello-py-project",
+  "initFileOpened": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)",
+  "initWorkspaceOpened": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)",
+  "lastPushToServer": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)"
+}
+
+###
+
+GET http://localhost:3000/api/status?theme=dark&timefor=file
+
+
+##
+
+  .key-name {
+    fill: {{#333}}; /* Dark gray */
+    font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
+            <!-- font-weight: bold; -->
+  }
+
+    .value {
+    font: 400 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
+    fill: #929292;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+  }
+
+    .box {
+    stroke: #666;
+    stroke-width: 2px;
+    rx: 7px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
