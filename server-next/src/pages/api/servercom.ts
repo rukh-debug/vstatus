@@ -11,7 +11,8 @@ export default async function handler(
   res: NextApiResponse<ServerResponse>
 ) {
   if (req.method === 'POST') {
-    let body: VScomeReqData = JSON.parse(req.body);
+    let body: VScomeReqData = req.body;
+    console.log(typeof body);
     await kv.set(
       "vstat",
       JSON.stringify(body),
