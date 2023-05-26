@@ -6,7 +6,7 @@ import VScomeReqData from '@/types/VScomReqData';
 import { formatDistanceToNow } from 'date-fns';
 
 let payloadSVG = `
-<svg width="{{width}}" height="120" viewBox="0 0 {{width}} 120" fill="none"
+<svg width="{{width}}" height="100" viewBox="0 0 {{width}} 100" fill="none"
 xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 <title id="titleId">vstatus</title>
 <desc id="descId">Live Visual Code Rich Presence</desc>
