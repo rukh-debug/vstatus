@@ -44,3 +44,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Improvise css
 - Authorization issue fix
+
+## [0.1.3]
+
+## Fixed
+
+- Better error handling
+- Readme improvised
