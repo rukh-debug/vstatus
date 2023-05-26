@@ -91,7 +91,6 @@
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
-    "@types/puppeteer": "^7.0.4",
     "@types/vscode": "^1.78.0",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
@@ -100,9 +99,5 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "typescript": "^5.0.4"
-  },
-  "dependencies": {
-    "date-fns": "^2.30.0",
-    "node-html-to-image": "^3.3.0"
   }
 }
