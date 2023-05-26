@@ -28,6 +28,8 @@ export async function activate(context: vscode.ExtensionContext) {
 		sendRequest(SERVER, finalBody, APIKEY)
 			.catch((err) => {
 				vscode.window.showErrorMessage(err.message);
+				// show message from server aswell if its a response from the server
+				err.response?.message ? vscode.window.showErrorMessage(err.response.message) : null;
 			});
 	}
 
