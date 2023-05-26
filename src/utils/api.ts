@@ -7,7 +7,7 @@ export async function sendRequest(serverurl: string, body: object, apikey: strin
       url: serverurl,
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        'x-auth-key': apikey
+        'authKey': apikey
       },
       data: body
     };
