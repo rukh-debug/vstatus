@@ -38,4 +38,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Have a server of it's own now
 - image generaton (png/jpg) removed, and implemented SVG through server
 
+## [0.1.2]
 
+## Fixed
+
+- Improvise css
+- Authorization issue fix
