@@ -186,73 +186,34 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
   }
 
   /* Animations */
-  @keyframes fadeInAnimation {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   @keyframes fadein {
     from {
       opacity: 0;
-      transform: rotate(0);
     }
     5% {
       opacity: 0.1;
-      transform: rotate(22.5);
     }
     15% {
       opacity: 0.3;
-      transform: rotate(45);
-    }
-    25% {
-      opacity: 0.4;
-      transform: rotate(67.5);
-    }
-    35% {
-      opacity: 0.6;
-      transform: rotate(90);
     }
     45% {
       opacity: 0.6;
-      transform: rotate(112.5);
-    }
-    55% {
-      opacity: 0.6;
-      transform: rotate(135);
-    }
-    65% {
-      opacity: 0.6;
-      transform: rotate(157.5);
     }
     75% {
       opacity: 0.7;
-      transform: rotate(180);
-    }
-    85% {
-      opacity: 0.8;
-      transform: rotate(202.5);
-    }
-    95% {
-      opacity: 0.9;
-      transform: rotate(225);
     }
     to {
       opacity: 1;
-      transform: rotate(225);
     }
   }
 
   .stagger {
     opacity: 1;
-    <!-- animation: fadein 0.3s ease-in-out forwards; -->
+    animation: fadein 0.5s ease-in-out forwards;
   }
 
   .icon {
-    <!-- animation: fadein 5s ease-in-out infinite; -->
+    animation: fadein 0.5s ease-in-out forwards; 
   }
 
 </style>
