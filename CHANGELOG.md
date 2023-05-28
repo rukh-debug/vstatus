@@ -51,3 +51,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Better error handling
 - Readme improvised
+
+## [0.1.4]
+
+### Added
+- Improvisation
