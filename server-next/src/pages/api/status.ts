@@ -1,13 +1,164 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { kv } from '@vercel/kv';
-import ServerResponse from '@/types/ServerResponse';
+import ReplaceAll from '@/types/ReplaceAll';
 import Vsdata from '@/types/Vsdata';
 import { db } from '@vercel/postgres';
 import { formatDistanceToNow } from 'date-fns';
 
-let payloadSVG = `
-<svg width="{{width}}" height="100" viewBox="0 0 {{width}} 100" fill="none"
+const compareTimes = (time1: Date): string => {
+  // just a "Since xhrs xmin ysec" maker
+
+  return formatDistanceToNow(time1, { addSuffix: true });
+};
+
+const sizeFixer = (text1: string, text2: string): number => {
+  // the width of svg is determined by the size of the workflow or filename string. 
+  // This will fix the size upto resonable label.
+  let toIncrease = 0;
+  const text1ConstantSize = 13;
+  const text2ConstantSize = 10;
+
+  if (text1.length > text1ConstantSize && text2.length <= text2ConstantSize) {
+    toIncrease = (text1.length - text1ConstantSize) * 4;
+  } else if (text2.length > text2ConstantSize && text1.length <= text1ConstantSize) {
+    toIncrease = (text2.length - text2ConstantSize) * 4;
+  } else if (text1.length > text1ConstantSize && text2.length > text2ConstantSize) {
+    toIncrease = Math.max(text1.length - text1ConstantSize, text2.length - text2ConstantSize) * 4;
+  }
+  return toIncrease;
+};
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+
+  // get the user requested theme, and the time calculation for workspace or file.
+  const { theme, timefor, bgc, keyfillc, valuefillc } = req.query;
+
+  // this is a mess
+  let dataObj: any;
+  if (process.env.DB_TYPE === "postgres") {
+    const client = await db.connect();
+    dataObj = (await client.sql`SELECT * FROM vsdata;`).rows[0];
+  } else if (process.env.DB_TYPE === "kv") {
+    dataObj = await kv.get("vsdata") as Vsdata;
+  } else {
+    dataObj = await kv.get("vsdata") as Vsdata;
+  }
+  // to avoide case issue due to postgres
+  let statusInterval: number;
+  let filename: string;
+  let workspace: string;
+  let initFileOpened: number;
+  let initWorkspaceOpened: number;
+  let lastPushToServer: number;
+
+  if (process.env.DB_TYPE === "postgres") {
+    // since postgres tend to send data with lowercase keys.
+    // we will move all the values to compitable variables first
+    statusInterval = Number(dataObj.statusinterval);
+    filename = dataObj.filename;
+    workspace = dataObj.workspace;
+    initFileOpened = Number(dataObj.initfileopened);
+    initWorkspaceOpened = Number(dataObj.initworkspaceopened);
+    lastPushToServer = Number(dataObj.lastpushtoserver);
+  } else {
+    statusInterval = Number(dataObj.statusInterval);
+    filename = dataObj.filename;
+    workspace = dataObj.workspace;
+    initFileOpened = Number(dataObj.initFileOpened);
+    initWorkspaceOpened = Number(dataObj.initWorkspaceOpened);
+    lastPushToServer = Number(dataObj.lastPushToServer);
+  }
+
+  // Ensure the user is online and sending data on the mentioned interval
+  const currentTimestamp: number = Date.now() / 1000; // Convert to seconds
+  const maximumOffset: number = 10; // Maximum allowable offset (in seconds)
+  const lastPushToServerTimestamp: number = new Date(lastPushToServer).getTime() / 1000;
+
+  // this will be used to store all the replaced value in svg image.
+  let replaceData: ReplaceAll = {};
+
+  // Check if the user is offline based on statusInterval and lastPushToServer
+  if (currentTimestamp - lastPushToServerTimestamp > statusInterval + maximumOffset) {
+    // User is assumed to be offline
+    replaceData = {
+      editingk: "Status", // during offline, change key editing to status
+      workspacek: "Probably", // during offline, change key workspace to probably
+      filename: "offline", // during offline, change filename variable to offline
+      workspace: "Sleeping", // during offline, change workspace to sleeping
+      since: compareTimes(new Date(lastPushToServer))
+    };
+
+  } else {
+    // User is assumed to be online
+    replaceData = {
+      ...replaceData,
+      editingk: "Editing",
+      workspacek: "Workspace",
+      filename: filename,
+      workspace: workspace,
+    };
+
+    // this calculates the timelaps of the file being edited or the workspace being opened.
+    switch (timefor) {
+      case "file":
+        replaceData.since = compareTimes(new Date(initFileOpened));
+        break;
+      case "workspace":
+        replaceData.since = compareTimes(new Date(initWorkspaceOpened));
+        break;
+      default:
+        replaceData.since = compareTimes(new Date(initFileOpened));
+        break;
+    }
+  }
+
+  // theme builder //
+
+  // width fix
+  replaceData.width = (400 + sizeFixer(filename, workspace)).toString();
+  // build theme
+  if (theme) {
+    switch (theme) {
+      case "dark":
+
+        replaceData = {
+          ...replaceData,
+          bgc: "0d1117",
+          keyfillc: "929292",
+          valuefillc: "929292",
+        };
+        break;
+      case "light":
+
+        replaceData = {
+          ...replaceData,
+          bgc: "fff",
+          keyfillc: "333",
+          valuefillc: "929292",
+        };
+        break;
+      default:
+
+        replaceData = {
+          ...replaceData,
+          bgc: "0d1117",
+          keyfillc: "929292",
+          valuefillc: "929292",
+        };
+        break;
+    }
+  } else {
+
+    bgc ? replaceData.bgc = String(bgc) : replaceData.bgc = "000000";
+    keyfillc ? replaceData.keyfillc = String(keyfillc) : replaceData.keyfillc = "ffffff";
+    valuefillc ? replaceData.valuefillc = String(valuefillc) : replaceData.valuefillc = "d3d3d3";
+  }
+
+  let payloadSVG = `
+<svg width="${replaceData.width}" height="100" viewBox="0 0 ${replaceData.width} 100" fill="none"
 xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 <title id="titleId">vstatus</title>
 <desc id="descId">Live Visual Code Rich Presence</desc>
@@ -21,14 +172,14 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
   }
 
   .key-name {
-    fill: #{{keyfillc}}; /* Dark gray */
+    fill: #${replaceData.keyfillc}; /* Dark gray */
     font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif;
     <!-- font-weight: bold; -->
   }
 
   .value {
     font: 500 12px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
-    fill: #{{valuefillc}};
+    fill: #${replaceData.valuefillc};
     white-space: nowrap;
     overflow: hidden;
     width: 0;
@@ -106,7 +257,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 
 </style>
 
-<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="#{{bgc}}" stroke-opacity="0"/>
+<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="#${replaceData.bgc}" stroke-opacity="0"/>
 
 <!-- this is svg icon of vscode -->
 <svg class="icon" viewBox="0 0 100 100" fill="none" x="25" y="16" width="65" height="65"
@@ -155,8 +306,8 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 <g transform="translate(0, 0)">
   <g class="stagger" style="animation-delay: 50ms" transform="translate(110, 30)">
     <text class="text-item">
-      <tspan class="key-name">Editing: </tspan>
-      <tspan class="value">{{filename}}</tspan>
+      <tspan class="key-name">${replaceData.editingk}: </tspan>
+      <tspan class="value">${replaceData.filename}</tspan>
     </text>
   </g>
 </g>
@@ -164,8 +315,8 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 <g transform="translate(0, 0)">
   <g class="stagger" style="animation-delay: 150ms" transform="translate(110, 54)">
     <text class="text-item">
-      <tspan class="key-name">Workspace: </tspan>
-      <tspan class="value">{{workspace}}</tspan>
+      <tspan class="key-name">${replaceData.workspacek}: </tspan>
+      <tspan class="value">${replaceData.workspace}</tspan>
     </text>
   </g>
 </g>
@@ -174,160 +325,19 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
   <g class="stagger" style="animation-delay: 200ms" transform="translate(110, 78)">
     <text class="text-item">
       <tspan class="key-name">Since </tspan>
-      <tspan class="value">{{since}}</tspan>
+      <tspan class="value">${replaceData.since}</tspan>
     </text>
   </g>
 </g>
 </svg>
 `;
 
-// just a "Since xhrs xmin ysec" maker
-const compareTimes = (time1: Date): string => {
-  return formatDistanceToNow(time1, { addSuffix: true });
-};
-
-// the width of svg is determined by the size of the workflow or filename string. 
-// This will fix the size upto resonable label.
-const sizeFixer = (text1: string, text2: string): number => {
-  let toIncrease = 0;
-  const text1ConstantSize = 13;
-  const text2ConstantSize = 10;
-
-  if (text1.length > text1ConstantSize && text2.length <= text2ConstantSize) {
-    toIncrease = (text1.length - text1ConstantSize) * 4;
-  } else if (text2.length > text2ConstantSize && text1.length <= text1ConstantSize) {
-    toIncrease = (text2.length - text2ConstantSize) * 4;
-  } else if (text1.length > text1ConstantSize && text2.length > text2ConstantSize) {
-    toIncrease = Math.max(text1.length - text1ConstantSize, text2.length - text2ConstantSize) * 4;
-  }
-  return toIncrease;
-};
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-
-  // get the user requested theme, and the time calculation for workspace or file.
-  const { theme, timefor, bgc, keyfillc, valuefillc } = req.query;
-
-  // fetch all data we have from kv storage
-  // const statusInterval = String(await kv.hget("vstat", "statusInterval"));
-  // const filename = String(await kv.hget("vstat", "filename"));
-  // const workspace = String(await kv.hget("vstat", "workspace"));
-  // const initFileOpened = String(await kv.hget("vstat", "initFileOpened"));
-  // const initWorkspaceOpened = String(await kv.hget("vstat", "initWorkspaceOpened"));
-  // const lastPushToServer = String(await kv.hget("vstat", "lastPushToServer"));
-
-  // this is a mess
-  let dataObj: any;
-  if (process.env.DB_TYPE === "postgres") {
-    const client = await db.connect();
-    dataObj = (await client.sql`SELECT * FROM vsdata;`).rows[0];
-  } else if (process.env.DB_TYPE === "kv") {
-    dataObj = await kv.get("vsdata") as Vsdata;
-  } else {
-    dataObj = await kv.get("vsdata") as Vsdata;
-  }
-  // to avoide case issue due to postgres
-  let statusInterval: number;
-  let filename: string;
-  let workspace: string;
-  let initFileOpened: number;
-  let initWorkspaceOpened: number;
-  let lastPushToServer: number;
-
-  if (process.env.DB_TYPE === "postgres") {
-    statusInterval = Number(dataObj.statusinterval);
-    filename = dataObj.filename;
-    workspace = dataObj.workspace;
-    initFileOpened = Number(dataObj.initfileopened);
-    initWorkspaceOpened = Number(dataObj.initworkspaceopened);
-    lastPushToServer = Number(dataObj.lastpushtoserver);
-  } else {
-    statusInterval = Number(dataObj.statusInterval);
-    filename = dataObj.filename;
-    workspace = dataObj.workspace;
-    initFileOpened = Number(dataObj.initFileOpened);
-    initWorkspaceOpened = Number(dataObj.initWorkspaceOpened);
-    lastPushToServer = Number(dataObj.lastPushToServer);
-  }
-
-  console.log(lastPushToServer);
-
-  // lets start baking
-  let svg = payloadSVG;
-
-
-  // Ensure the user is online and sending data on the mentioned interval
-  const currentTimestamp: number = Date.now() / 1000; // Convert to seconds
-  const maximumOffset: number = 10; // Maximum allowable offset (in seconds)
-  const lastPushToServerTimestamp: number = new Date(lastPushToServer).getTime() / 1000;
-
-  // Check if the user is offline based on statusInterval and lastPushToServer
-  // TODO:
-  // this replae will be replaced with something better on next update
-  if (currentTimestamp - lastPushToServerTimestamp > statusInterval + maximumOffset) {
-    // User is assumed to be offline
-    svg = svg.replace("Editing:", "Status:");
-    svg = svg.replace("Workspace:", "Probably:");
-    svg = svg.replace("{{filename}}", "Offline");
-    svg = svg.replace("{{workspace}}", "Sleeping");
-    svg = svg.replace("{{since}}", compareTimes(new Date(lastPushToServer)));
-  } else {
-    // User is assumed to be online
-    // Continue with the rest of the code
-
-    // add basic info
-    svg = svg.replace("{{filename}}", filename);
-    svg = svg.replace("{{workspace}}", workspace);
-
-    // this calculates the timelaps of the file being edited or the workspace being opened.
-    switch (timefor) {
-      case "file":
-        svg = svg.replace("{{since}}", compareTimes(new Date(initFileOpened)));
-        break;
-      case "workspace":
-        svg = svg.replace("{{since}}", compareTimes(new Date(initWorkspaceOpened)));
-        break;
-      default:
-        svg = svg.replace("{{since}}", compareTimes(new Date(initFileOpened)));
-        break;
-    }
-  }
-  // theme management
-  // width fix
-  svg = svg.replaceAll("{{width}}", (400 + sizeFixer(filename, workspace)).toString());
-  // build theme
-  if (theme) {
-    switch (theme) {
-      case "dark":
-        svg = svg.replace("{{bgc}}", "0d1117");
-        svg = svg.replace("{{keyfillc}}", "929292");
-        svg = svg.replace("{{valuefillc}}", "929292");
-        break;
-      case "light":
-        svg = svg.replace("{{bgc}}", "fff");
-        svg = svg.replace("{{keyfillc}}", "333");
-        svg = svg.replace("{{valuefillc}}", "929292");
-        break;
-      default:
-        svg = svg.replace("{{bgc}}", "0d1117");
-        svg = svg.replace("{{keyfillc}}", "333");
-        svg = svg.replace("{{valuefillc}}", "929292");
-        break;
-    }
-  } else {
-    bgc ? svg = svg.replace("{{bgc}}", String(bgc)) : svg = svg.replace("{{bgc}}", "000000");
-    keyfillc ? svg = svg.replace("{{keyfillc}}", String(keyfillc)) : svg = svg.replace("{{keyfillc}}", "ffffff");
-    valuefillc ? svg = svg.replace("{{valuefillc}}", String(valuefillc)) : svg = svg.replace("{{valuefillc}}", "d3d3d3");
-  }
   // convert string to buffer, nextjs does it this way.
-  const buff = Buffer.from(svg, "utf-8");
-  // returns svg image with the data available on kv storage
+  const buff = Buffer.from(payloadSVG, "utf-8");
+  // returns svg image with the data available on kv/postgres storage
+  // res.appendHeader('Content-Type', 'image/svg+xml');
   res.appendHeader('Content-Type', 'image/svg+xml');
-  res.appendHeader('Content-Type', 'image/svg+xml');
-  res.appendHeader('Cache-Control', 'no-cache');
+  res.appendHeader('Cache-Control', 'no-cache'); // this is because, github saves images in caching, so to avoide that. 
 
   res.send(buff);
 }
