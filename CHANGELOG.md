@@ -65,3 +65,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Same stuff for extension, but server is upgraded with postgrace db option aswell. (Can choose between KV or postgres now)
 - Theme setting fix (hex values didnt worked before)
 
+## [0.2.1]
+
+### Added
+- Now timestamps will be sent to server
+
+### Fixed
+- KV bug fix on server side
+

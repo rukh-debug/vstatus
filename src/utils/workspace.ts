@@ -56,9 +56,9 @@ export const workspaceinfo = (context: vscode.ExtensionContext) => {
   const finalDataToResolve = {
     filename,
     workspace,
-    initFileOpened,
-    initWorkspaceOpened,
-    lastPushToServer: time
+    initFileOpened: String(new Date(initFileOpened as number).valueOf()),
+    initWorkspaceOpened: String(new Date(initWorkspaceOpened as number).valueOf()),
+    lastPushToServer: String(new Date(time as number).valueOf())
   };
   console.log(finalDataToResolve);
   return finalDataToResolve;
