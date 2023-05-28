@@ -17,7 +17,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	async function makeandbake() {
 		//if user changes this setting, it should be fetched on next loop;
 		let SERVER = await getConfiguredValue('serverurl', 'Enter the server URL:');
-		let APIKEY = await getConfiguredValue('apikey', 'Enter the API key:');
+		let APIKEY = await getConfiguredValue('vstatus_api_key', 'Enter the API key:');
 
 		let workspaceInfo = workspaceinfo(context);
 		let finalBody = {

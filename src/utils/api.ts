@@ -21,4 +21,4 @@ export async function sendRequest(serverurl: string, body: object, apikey: strin
         reject(error);
       });
   });
-}
+};

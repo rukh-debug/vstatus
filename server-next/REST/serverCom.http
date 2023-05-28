@@ -18,24 +18,24 @@ GET http://localhost:3000/api/status?theme=dark&timefor=file
 
 ##
 
-  .key-name {
-    fill: {{#333}}; /* Dark gray */
-    font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
-            <!-- font-weight: bold; -->
-  }
+  # .key-name {
+  #   fill: {{#333}}; /* Dark gray */
+  #   font: 500 12px 'Segoe UI', Ubuntu, Sans-Serif;
+  #           <!-- font-weight: bold; -->
+  # }
 
-    .value {
-    font: 400 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
-    fill: #929292;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-  }
+  #   .value {
+  #   font: 400 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
+  #   fill: #929292;
+  #   white-space: nowrap;
+  #   overflow: hidden;
+  #   width: 0;
+  # }
 
-    .box {
-    stroke: #666;
-    stroke-width: 2px;
-    rx: 7px;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-  }
+  #   .box {
+  #   stroke: #666;
+  #   stroke-width: 2px;
+  #   rx: 7px;
+  #   font-family: Arial, sans-serif;
+  #   font-size: 18px;
+  # }

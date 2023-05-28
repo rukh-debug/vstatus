@@ -37,7 +37,7 @@
           "default": "",
           "description": "The URL of the server deployed (probably on vercel)."
         },
-        "vstatus.apikey": {
+        "vstatus.vstatus_api_key": {
           "type": "string",
           "default": "",
           "description": "The api key you have in .env variables of the server"
