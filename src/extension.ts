@@ -16,8 +16,8 @@ export async function activate(context: vscode.ExtensionContext) {
 	// function to fetch vscode workspace information and build image based on it.
 	async function makeandbake() {
 		//if user changes this setting, it should be fetched on next loop;
-		let SERVER = await getConfiguredValue('serverurl', 'Enter the server URL:');
-		let APIKEY = await getConfiguredValue('vstatus_api_key', 'Enter the API key:');
+		let SERVER = await getConfiguredValue('serverurl', 'Enter the server URL for vstatus:');
+		let APIKEY = await getConfiguredValue('vstatus_api_key', 'Enter the API key for vstatus:');
 
 		let workspaceInfo = workspaceinfo(context);
 		let finalBody = {

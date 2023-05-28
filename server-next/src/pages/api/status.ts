@@ -2,7 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { kv } from '@vercel/kv';
 import ServerResponse from '@/types/ServerResponse';
-import VScomeReqData from '@/types/VScomReqData';
+import Vsdata from '@/types/Vsdata';
+import { db } from '@vercel/postgres';
 import { formatDistanceToNow } from 'date-fns';
 
 let payloadSVG = `
@@ -20,14 +21,14 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
   }
 
   .key-name {
-    fill: {{keyfillc}}; /* Dark gray */
+    fill: #{{keyfillc}}; /* Dark gray */
     font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif;
     <!-- font-weight: bold; -->
   }
 
   .value {
     font: 500 12px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; 
-    fill: {{valuefillc}};
+    fill: #{{valuefillc}};
     white-space: nowrap;
     overflow: hidden;
     width: 0;
@@ -105,7 +106,7 @@ xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
 
 </style>
 
-<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="{{bgc}}" stroke-opacity="0"/>
+<rect class="box" x="0.5" y="0.5" rx="4.5" width="99%" height="99%" stroke="#e4e2e2" fill="#{{bgc}}" stroke-opacity="0"/>
 
 <!-- this is svg icon of vscode -->
 <svg class="icon" viewBox="0 0 100 100" fill="none" x="25" y="16" width="65" height="65"
@@ -217,13 +218,40 @@ export default async function handler(
   // const initFileOpened = String(await kv.hget("vstat", "initFileOpened"));
   // const initWorkspaceOpened = String(await kv.hget("vstat", "initWorkspaceOpened"));
   // const lastPushToServer = String(await kv.hget("vstat", "lastPushToServer"));
-  const dataObj: VScomeReqData = await kv.get("vstat") as VScomeReqData;
-  const statusInterval: number = Number(dataObj.statusInterval);
-  const filename = dataObj.filename;
-  const workspace = dataObj.workspace;
-  const initFileOpened = dataObj.initFileOpened;
-  const initWorkspaceOpened = dataObj.initWorkspaceOpened;
-  const lastPushToServer = dataObj.lastPushToServer;
+
+  // this is a mess
+  let dataObj: any;
+  if (process.env.DB_TYPE === "postgres") {
+    const client = await db.connect();
+    dataObj = (await client.sql`SELECT * FROM vsdata;`).rows[0];
+  } else if (process.env.DB_TYPE === "kv") {
+    dataObj = await kv.get("vstat") as Vsdata;
+  } else {
+    dataObj = await kv.get("vstat") as Vsdata;
+  }
+  // to avoide case issue due to postgres
+  let statusInterval: number;
+  let filename: string;
+  let workspace: string;
+  let initFileOpened: string;
+  let initWorkspaceOpened: string;
+  let lastPushToServer: string;
+
+  if (process.env.DB_TYPE === "postgres") {
+    statusInterval = dataObj.statusinterval;
+    filename = dataObj.filename;
+    workspace = dataObj.workspace;
+    initFileOpened = dataObj.initfileopened;
+    initWorkspaceOpened = dataObj.initworkspaceopened;
+    lastPushToServer = dataObj.lastpushtoserver;
+  } else {
+    statusInterval = Number(dataObj.statusInterval);
+    filename = dataObj.filename;
+    workspace = dataObj.workspace;
+    initFileOpened = dataObj.initFileOpened;
+    initWorkspaceOpened = dataObj.initWorkspaceOpened;
+    lastPushToServer = dataObj.lastPushToServer;
+  }
 
   // lets start baking
   let svg = payloadSVG;
@@ -235,6 +263,8 @@ export default async function handler(
   const lastPushToServerTimestamp: number = new Date(lastPushToServer).getTime() / 1000;
 
   // Check if the user is offline based on statusInterval and lastPushToServer
+  // TODO:
+  // this replae will be replaced with something better on next update
   if (currentTimestamp - lastPushToServerTimestamp > statusInterval + maximumOffset) {
     // User is assumed to be offline
     svg = svg.replace("Editing:", "Status:");
@@ -270,25 +300,25 @@ export default async function handler(
   if (theme) {
     switch (theme) {
       case "dark":
-        svg = svg.replace("{{bgc}}", "#0d1117");
-        svg = svg.replace("{{keyfillc}}", "#929292");
-        svg = svg.replace("{{valuefillc}}", "#929292");
+        svg = svg.replace("{{bgc}}", "0d1117");
+        svg = svg.replace("{{keyfillc}}", "929292");
+        svg = svg.replace("{{valuefillc}}", "929292");
         break;
       case "light":
-        svg = svg.replace("{{bgc}}", "#fff");
-        svg = svg.replace("{{keyfillc}}", "#333");
-        svg = svg.replace("{{valuefillc}}", "#929292");
+        svg = svg.replace("{{bgc}}", "fff");
+        svg = svg.replace("{{keyfillc}}", "333");
+        svg = svg.replace("{{valuefillc}}", "929292");
         break;
       default:
-        svg = svg.replace("{{bgc}}", "#0d1117");
-        svg = svg.replace("{{keyfillc}}", "#333");
-        svg = svg.replace("{{valuefillc}}", "#929292");
+        svg = svg.replace("{{bgc}}", "0d1117");
+        svg = svg.replace("{{keyfillc}}", "333");
+        svg = svg.replace("{{valuefillc}}", "929292");
         break;
     }
   } else {
-    bgc ? svg = svg.replace("{{bgc}}", String(bgc)) : svg = svg.replace("{{bgc}}", "black");
-    keyfillc ? svg = svg.replace("{{keyfillc}}", String(keyfillc)) : svg = svg.replace("{{keyfillc}}", "white");
-    valuefillc ? svg = svg.replace("{{valuefillc}}", String(valuefillc)) : svg = svg.replace("{{valuefillc}}", "gray");
+    bgc ? svg = svg.replace("{{bgc}}", String(bgc)) : svg = svg.replace("{{bgc}}", "000000");
+    keyfillc ? svg = svg.replace("{{keyfillc}}", String(keyfillc)) : svg = svg.replace("{{keyfillc}}", "ffffff");
+    valuefillc ? svg = svg.replace("{{valuefillc}}", String(valuefillc)) : svg = svg.replace("{{valuefillc}}", "d3d3d3");
   }
   // convert string to buffer, nextjs does it this way.
   const buff = Buffer.from(svg, "utf-8");

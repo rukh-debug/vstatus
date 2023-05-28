@@ -1,4 +1,4 @@
-export default interface VScomeReqData {
+export default interface Vsdata {
   statusInterval: string
   filename: string
   workspace: string

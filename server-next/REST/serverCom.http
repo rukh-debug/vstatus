@@ -1,14 +1,14 @@
 POST http://localhost:3000/api/servercom
-authorization: testtoken
+authorization: kD36bef6cfaASbrbzxK4Gr
 Content-Type: application/json
 
 {
-  "statusInterval": "10",
+  "statusInterval": "19",
   "filename": "helloworld.py",
   "workspace": "hello-py-project",
-  "initFileOpened": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)",
-  "initWorkspaceOpened": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)",
-  "lastPushToServer": "Fri May 26 2023 19:45:03 GMT+0545 (Nepal Time)"
+  "initFileOpened": "2023-05-28T19:20:57.402Z",
+  "initWorkspaceOpened": "2023-05-28T19:20:57.402Z",
+  "lastPushToServer": "2023-05-28T19:20:57.402Z"
 }
 
 ###

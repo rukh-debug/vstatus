@@ -18,7 +18,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Cache control to nocache (Github readme stores cache, image updates frequently.)
 
-
 ## [0.0.3]
 
 ### Added
@@ -34,6 +33,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.1.0]
 
 ### Added
+
 - Most of the thing recreated
 - Have a server of it's own now
 - image generaton (png/jpg) removed, and implemented SVG through server
@@ -55,4 +55,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.1.4]
 
 ### Added
+
 - Improvisation
+
+## [0.2.0]
+
+### Added
+
+- Same stuff for extension, but server is upgraded with postgrace db option aswell. (Can choose between KV or postgres now)
+- Theme setting fix (hex values didnt worked before)
+
