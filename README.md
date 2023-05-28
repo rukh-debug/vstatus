@@ -34,7 +34,7 @@ Open the extension's settings by navigating to **File > Preferences > Settings**
 
 - `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible. `eg. https://vstatus.verel.app`
 
-- `vstatus.apiKey`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name `VSTATUS_API_KEY`.
+- `vstatus.vstatus_api_key`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name `VSTATUS_API_KEY`.
 
 7. Save the settings.
 
