@@ -32,13 +32,13 @@ Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter
 
 > ext install rubennnk.vstatus
 
-Or you can do it manually.
+Or you can do it manually. Search `vstatus` and install.
 
 6. Open the extension's settings by navigating to **File > Preferences > Settings** or using the keyboard shortcut **Ctrl+Comma (,)**.
 
 7. Configure the following settings:
 
-- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. `Default: 10`. Sending a request to server each 10 secon makes 1 vercel KV query. On hobby tier of vercel, you can send 30,000 KV query per month. So use calculate and set it accordingly. 
+- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. `Default: 10`. Sending a request to server each 10 secon makes 1 vercel KV query. On hobby tier of vercel, you can send 30,000 KV query per month. So use calculate and set it accordingly.
 
 - `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible. `eg. https://vstatus.verel.app`
 
@@ -76,6 +76,15 @@ Example usage with query parameters:
 https://<your-server-url>/api/status?theme=dark&timefor=file
 
 ```
+
+### Examples
+
+| Theme                                           | Demo                                                                                                                                          |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dark                                            | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/slithery0)                                |
+| Light                                           | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=light&timefor=file)](https://github.com/slithery0)                               |
+| bgc `black`                                     | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=black&timefor=file)](https://github.com/slithery0)                                 |
+| bgc `purple` keyfillc `white` valuefillc `gray` | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=purple&keyfillc=white&valuefillc=gray&timefor=file)](https://github.com/slithery0) |
 
 This will generate an SVG image with a dark theme, showing the time for the file, a black background color, white key name, and green value name.
 
