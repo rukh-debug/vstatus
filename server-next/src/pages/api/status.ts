@@ -225,20 +225,19 @@ export default async function handler(
     const client = await db.connect();
     dataObj = (await client.sql`SELECT * FROM vsdata;`).rows[0];
   } else if (process.env.DB_TYPE === "kv") {
-    dataObj = await kv.get("vstat") as Vsdata;
+    dataObj = await kv.get("vsdata") as Vsdata;
   } else {
-    dataObj = await kv.get("vstat") as Vsdata;
+    dataObj = await kv.get("vsdata") as Vsdata;
   }
   // to avoide case issue due to postgres
   let statusInterval: number;
   let filename: string;
   let workspace: string;
-  let initFileOpened;
-  let initWorkspaceOpened;
-  let lastPushToServer;
+  let initFileOpened: number;
+  let initWorkspaceOpened: number;
+  let lastPushToServer: number;
 
   if (process.env.DB_TYPE === "postgres") {
-    console.log(dataObj);
     statusInterval = Number(dataObj.statusinterval);
     filename = dataObj.filename;
     workspace = dataObj.workspace;
@@ -246,13 +245,12 @@ export default async function handler(
     initWorkspaceOpened = Number(dataObj.initworkspaceopened);
     lastPushToServer = Number(dataObj.lastpushtoserver);
   } else {
-    
     statusInterval = Number(dataObj.statusInterval);
     filename = dataObj.filename;
     workspace = dataObj.workspace;
-    initFileOpened = dataObj.initFileOpened;
-    initWorkspaceOpened = dataObj.initWorkspaceOpened;
-    lastPushToServer = dataObj.lastPushToServer;
+    initFileOpened = Number(dataObj.initFileOpened);
+    initWorkspaceOpened = Number(dataObj.initWorkspaceOpened);
+    lastPushToServer = Number(dataObj.lastPushToServer);
   }
 
   console.log(lastPushToServer);
