@@ -26,17 +26,25 @@ To use vstatus, follow these steps:
 
 5. Install the vstatus extension in Visual Studio Code.
 
-Open the extension's settings by navigating to **File > Preferences > Settings** or using the keyboard shortcut **Ctrl+Comma (,)**.
+To install
 
-6. Configure the following settings:
+Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter.
 
-- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. `Default: 10`.
+> ext install rubennnk.vstatus
+
+Or you can do it manually.
+
+6. Open the extension's settings by navigating to **File > Preferences > Settings** or using the keyboard shortcut **Ctrl+Comma (,)**.
+
+7. Configure the following settings:
+
+- `vstatus.interval`: Specifies the interval (in seconds) at which vstatus extracts workspace information. `Default: 10`. Sending a request to server each 10 secon makes 1 vercel KV query. On hobby tier of vercel, you can send 30,000 KV query per month. So use calculate and set it accordingly. 
 
 - `vstatus.serverurl`: This is the URL of the deployed server. Provide the URL where the server is hosted and accessible. `eg. https://vstatus.verel.app`
 
 - `vstatus.vstatus_api_key`: This is the API key set during the deployment of the server. The server stores the key in the .env file with the variable name `VSTATUS_API_KEY`.
 
-7. Save the settings.
+8. Save the settings.
 
 ## Usage
 
