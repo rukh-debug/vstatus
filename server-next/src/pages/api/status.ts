@@ -233,17 +233,18 @@ export default async function handler(
   let statusInterval: number;
   let filename: string;
   let workspace: string;
-  let initFileOpened: string;
-  let initWorkspaceOpened: string;
-  let lastPushToServer: string;
+  let initFileOpened;
+  let initWorkspaceOpened;
+  let lastPushToServer;
 
   if (process.env.DB_TYPE === "postgres") {
-    statusInterval = dataObj.statusinterval;
+    console.log(dataObj);
+    statusInterval = Number(dataObj.statusinterval);
     filename = dataObj.filename;
     workspace = dataObj.workspace;
-    initFileOpened = dataObj.initfileopened;
-    initWorkspaceOpened = dataObj.initworkspaceopened;
-    lastPushToServer = dataObj.lastpushtoserver;
+    initFileOpened = Number(dataObj.initfileopened);
+    initWorkspaceOpened = Number(dataObj.initworkspaceopened);
+    lastPushToServer = Number(dataObj.lastpushtoserver);
   } else {
     statusInterval = Number(dataObj.statusInterval);
     filename = dataObj.filename;
@@ -252,6 +253,8 @@ export default async function handler(
     initWorkspaceOpened = dataObj.initWorkspaceOpened;
     lastPushToServer = dataObj.lastPushToServer;
   }
+
+  console.log(lastPushToServer);
 
   // lets start baking
   let svg = payloadSVG;
