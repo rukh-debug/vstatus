@@ -246,6 +246,7 @@ export default async function handler(
     initWorkspaceOpened = Number(dataObj.initworkspaceopened);
     lastPushToServer = Number(dataObj.lastpushtoserver);
   } else {
+    
     statusInterval = Number(dataObj.statusInterval);
     filename = dataObj.filename;
     workspace = dataObj.workspace;
