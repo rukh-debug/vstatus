@@ -76,8 +76,10 @@ Example usage with query parameters:
 https://<your-server-url>/api/status?theme=dark&timefor=file
 
 ```
+This will generate an SVG image with a dark theme, showing the time for the file, a black background color, white key name, and green value name.
 
-### Examples
+
+### Live Examples
 
 | Theme                                           | Demo                                                                                                                                          |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -86,7 +88,6 @@ https://<your-server-url>/api/status?theme=dark&timefor=file
 | bgc `black`                                     | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=black&timefor=file)](https://github.com/slithery0)                                 |
 | bgc `purple` keyfillc `white` valuefillc `gray` | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=purple&keyfillc=white&valuefillc=gray&timefor=file)](https://github.com/slithery0) |
 
-This will generate an SVG image with a dark theme, showing the time for the file, a black background color, white key name, and green value name.
 
 ## License
 
