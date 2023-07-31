@@ -2,7 +2,7 @@
 
 vstatus is a Visual Studio Code extension that extracts workspace information, such as filename, workspace name, and time elapsed, and sends this data to a server. The server then generates an SVG image based on the received information and serves it on an endpoint. This endpoint can be used to retrieve the updated SVG image containing filename, workspace name, and time lapse. (Intented to be used for github readme)
 
-# Live DEMO
+# Status
 
 [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/slithery0)
 
