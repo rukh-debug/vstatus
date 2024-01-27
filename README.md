@@ -4,7 +4,7 @@ vstatus is a Visual Studio Code extension that extracts workspace information, s
 
 # Status
 
-[![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/slithery0)
+[![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/rukh-debug)
 
 More examples below.
 
@@ -18,7 +18,7 @@ To setup vstatus for yourself, follow these steps:
 
 1. Deploy the server by clicking on the "Deploy with Vercel" button below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fslithery0%2Fvstatus%2Ftree%2Fmain%2Fserver-next&env=VSTATUS_API_KEY,DB_TYPE&envDescription=Generate%20a%20random%20string%20and%20put%20it%20on%20VSTATUS_API_KEY.%20Keep%20it%20safe%2C%20this%20is%20like%20your%20password.%20AND%20in%20DB_TYPE%20use%20either%20%60postgres%60%20or%20%60kv%60.%20&project-name=vstatus&repository-name=vstatus)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Frukh-debug%2Fvstatus%2Ftree%2Fmain%2Fserver-next&env=VSTATUS_API_KEY,DB_TYPE&envDescription=Generate%20a%20random%20string%20and%20put%20it%20on%20VSTATUS_API_KEY.%20Keep%20it%20safe%2C%20this%20is%20like%20your%20password.%20AND%20in%20DB_TYPE%20use%20either%20%60postgres%60%20or%20%60kv%60.%20&project-name=vstatus&repository-name=vstatus)
 
 2. You will be asked to add value for `VSTATUS_API_KEY` & `DB_TYPE`. For API key generate a secure key add inside the value field and keep it safe, you will need that in step 6. For Database either insert `postgres` or `kv` as it's value. Remember which one you set, you will need that in next step. Now you may proceed and press deploy button. YAY you are done with the deployment. Keep your server url, you will need that in step 6.
 
@@ -82,10 +82,10 @@ This will generate an SVG image with a dark theme, showing the time for the file
 
 | Theme                                                                  | Demo                                                                                                                                                  |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dark                                                                   | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/slithery0)                                        |
-| Light                                                                  | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=light&timefor=file)](https://github.com/slithery0)                                       |
-| bgc `000000`                                                           | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=000000&timefor=file)](https://github.com/slithery0)                                        |
-| bgc `282828` keyfillc `fbf1c7` valuefillc `d5c4a1` timefor `workspace` | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=282828&keyfillc=fbf1c7&valuefillc=d5c4a1&timefor=workspace)](https://github.com/slithery0) |
+| Dark                                                                   | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=dark&timefor=file)](https://github.com/rukh-debug)                                        |
+| Light                                                                  | [![Live feed](https://vstatus.rubenk.com.np/api/status?theme=light&timefor=file)](https://github.com/rukh-debug)                                       |
+| bgc `000000`                                                           | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=000000&timefor=file)](https://github.com/rukh-debug)                                        |
+| bgc `282828` keyfillc `fbf1c7` valuefillc `d5c4a1` timefor `workspace` | [![Live feed](https://vstatus.rubenk.com.np/api/status?bgc=282828&keyfillc=fbf1c7&valuefillc=d5c4a1&timefor=workspace)](https://github.com/rukh-debug) |
 
 ## License
 
